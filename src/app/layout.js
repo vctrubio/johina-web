@@ -1,9 +1,12 @@
-import { Inter } from "next/font/google";
+import { Noto_Serif_Khitan_Small_Script } from "next/font/google";
 import "../globals.css";
 import NavBar from "../../components/NavBar";
 import TitleBar from "../../components/TitleBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSerifKhitan = Noto_Serif_Khitan_Small_Script({ 
+  subsets: ["khitan-small-script"],
+  weight: "400",
+});
 
 export const metadata = {
   title: "Johina Murals",
@@ -13,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={notoSerifKhitan.className} style={{padding: '1em'}}>
         <TitleBar />
         <NavBar />
         {children}
