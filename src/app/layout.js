@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={notoSerifKhitan.className} style={{padding: '1em'}}>
+      <body className={notoSerifKhitan.className}>
         <TitleBar />
         <NavBar />
         {children}
