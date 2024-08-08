@@ -24,12 +24,3 @@ export default async function Home() {
     </div>
   );
 }
-
-/* TODOS CARD 
-{mural.photosCollection.items.map((photo, photoIndex) => (
-              <ClientImage>
-
-const ClientImage = ({ src, alt, width, height }) => {
-  return <Image src={src} alt={alt} width={width} height={height} />;
-};
-*/
