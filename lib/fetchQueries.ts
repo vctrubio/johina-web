@@ -21,7 +21,8 @@ export const fetchAllContenful = async () => {
     `;
 
     const data = await contentGqlFetcher<MuralQuery>({ query });
+    // const AnotherData = await contentGqlFetcher<AnotherMuralQuery>({ query });
     if (!data)
-        throw Error('Check......')
+        throw new Error('Check......')
     return data
 }
