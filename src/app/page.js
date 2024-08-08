@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { fetchAllContenful } from "@/lib/fetchQueries";
+import { MuralCard } from "@/components/MuralCoverCard";
 
 //Swiper {Autoplay} from 'swiper' aka also carousel
 
@@ -18,19 +18,7 @@ export default async function Home() {
           <p>Location: {mural.location}</p>
           <p>Close Up: {mural.closeUp ? 'Yes' : 'No'}</p>
           <p>Photo count: {mural.photosCollection.items.length}</p>
-
-          {/* <div>
-            {mural.photosCollection.items.map((photo, photoIndex) => (
-              <Image
-                // key={photoIndex}
-                src={photo.url}
-                alt={photo.title}
-                width={500}
-                height={500}
-              />
-            ))}
-          </div> */}
-          
+          <MuralCard cover={mural.photosCollection.items[0]} />
         </div>
       ))}
     </div>

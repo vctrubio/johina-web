@@ -58,3 +58,10 @@ body {
     padding: 1em;
   }
 }
+
+.m-card{
+  width: 380px;
+  height: 380px;
+  border-radius: 8px;
+  border: 2px solid var(--c2);
+}
