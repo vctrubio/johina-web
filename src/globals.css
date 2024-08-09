@@ -98,3 +98,22 @@ body {
     }
   }
 }
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: .5em 1em;
+  align-items: center;
+  gap: 1em;
+
+  >*{
+    padding: .2em .5em;
+    border-bottom: 4px solid transparent;
+    border-radius: 0px;
+    font-weight: 600;
+  }
+  >*:hover {
+    border-bottom: 4px solid var(--c1);
+  }
+}
