@@ -12,7 +12,7 @@ const MuralId = async ({ params }) => {
     }
 
     return (
-        <div className="border ">
+        <div className="border">
             {ptr ? (
                 <>
                     <h1>Title: {ptr.title}</h1>
@@ -28,8 +28,3 @@ const MuralId = async ({ params }) => {
 
 export default MuralId;
 
-
-/*
-singular call to contentful and get by id
-
-*/
