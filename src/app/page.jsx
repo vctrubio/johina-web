@@ -1,13 +1,6 @@
 import { fetchAllContenful } from "@/lib/fetchQueries";
 import { MuralCard } from "@/components/MuralCoverCard";
-import { SwiperHome } from "@/components/SwiperFrontPage";
-
-const InstaSwiperComponent = () => {
-  return (
-    <div className="swiper-insta">
-    </div>
-  )
-}
+import { SwiperHome, InstaSwiperComponent } from "@/components/SwiperFrontPage";
 
 const HomeComponent = () => {
   return (
@@ -26,7 +19,7 @@ export default async function Home() {
     <div>
       <SwiperHome/>
       <HomeComponent />
-      <InstaSwiperComponent />
+      {/* <InstaSwiperComponent /> */}
     </div>
   );
 }
