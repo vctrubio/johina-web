@@ -1,26 +1,28 @@
 import { slugTitle, titleSlug } from "@/utils";
 import { fetchMuralById } from "@/lib/fetchQueries"
 
-const MuralId = ({params}) => {
-    const titleId = slugTitle(params.title);
-    console.log('params', titleId);
+const MuralId = async ({ params }) => {
     let ptr;
-    
+
     try {
-        ptr = fetchMuralById(titleId).then(data => {
-            
-            console.log('hello...', data['muralCollection']['items']);
-            return data['muralCollection']['items'];
-        })
+        ptr = await fetchMuralById(slugTitle(params.title))
+        ptr = ptr['muralCollection']['items'][0];
     } catch (e) {
-        console.log(e);
         return <>NO data found</>
     }
 
     return (
-        <>
-            you have hit the g spot
-        </>
+        <div className="border ">
+            {ptr ? (
+                <>
+                    <h1>Title: {ptr.title}</h1>
+                    <p>Description: {ptr.description}</p>
+                    <p>Location: {ptr.location}</p>
+                    <p>Close Up: {ptr.closeUp}</p>
+                    <p>Photos Count: {ptr.photosCollection.items.length}</p>
+                </>
+            ) : <h1>Not found page</h1>}
+        </div>
     );
 }
 
