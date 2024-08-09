@@ -38,6 +38,13 @@ body {
   }
 }
 
+h1 {
+  font-weight: 900;
+  font-size: 55px;
+  text-align: center;
+  padding: .2em 0;
+}
+
 .title-bar {
   border: 2px solid white;
   padding: 5em;
@@ -108,7 +115,7 @@ nav {
   gap: 1em;
 
   >* {
-    padding: 2em 1em;
+    padding: .8em 1em;
     border-bottom: 4px solid transparent;
     border-radius: 0px;
     font-weight: 600;
@@ -118,7 +125,7 @@ nav {
     border-bottom: 4px solid var(--c1);
   }
 
-  #logo {
+  /* #logo {
     position: absolute;
     left: 0;
     top: 0;
@@ -127,14 +134,15 @@ nav {
     width: 116px;
     padding: 0 !important;
     border: none !important;
-  }
+  } */
 }
 
 .swiper {
   border: 1px solid var(--b3);
   width: 80%;
   height: 650px;
-  margin: 1.6em auto;
+  margin: 2em auto;
+  border-radius: 12px;
 }
 
 .swiper-insta{
@@ -144,14 +152,7 @@ nav {
 }
 
 .home {
-  margin: 4em 0;
-
-  h1 {
-    font-weight: 900;
-    font-size: 55px;
-    text-align: center;
-    padding: .2em 0;
-  }
+  margin: 6em 0;
 
   .childs {
     display: flex;

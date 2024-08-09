@@ -20,10 +20,10 @@ const InstaSwiperComponent = () => {
 const HomeComponent = () => {
   return (
     <div className="home">
-      <h1>Johina </h1>
       <div className="childs">
-        <div className="child-one">A</div>
-        <div className="child-two">B</div>
+        <div className="child-one"></div>
+        <div className="child-two"><p>
+        </p></div>
       </div>
     </div>
   )
@@ -32,9 +32,9 @@ const HomeComponent = () => {
 export default async function Home() {
   return (
     <div>
-      <SwiperComponent/>
-      <HomeComponent/>
-      <InstaSwiperComponent/>
+      <SwiperComponent />
+      <HomeComponent />
+      <InstaSwiperComponent />
     </div>
   );
 }
