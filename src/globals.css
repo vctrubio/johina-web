@@ -119,22 +119,16 @@ nav {
     border-bottom: 4px solid transparent;
     border-radius: 0px;
     font-weight: 600;
+    transition: border-bottom 1s; /* Add transition */
   }
 
-  >*:hover {
+  >*:hover:not(.active) {
     border-bottom: 4px solid var(--c1);
   }
-
-  /* #logo {
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: 1px solid var(--c1);
-    height: 116px;
-    width: 116px;
-    padding: 0 !important;
-    border: none !important;
-  } */
+  
+  .active {
+    font-weight: bolder;
+  }
 }
 
 .swiper {
