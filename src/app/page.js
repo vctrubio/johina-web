@@ -10,17 +10,8 @@ export default async function Home() {
   console.log(murals);
 
   return (
-    <div className="m-container">
-      {murals.map((mural, index) => (
-        <div key={index} className="m-item">
-          <h2>title: {mural.title}</h2>
-          <p>description: {mural.description}</p>
-          <p>Location: {mural.location}</p>
-          <p>Close Up: {mural.closeUp ? 'Yes' : 'No'}</p>
-          <p>Photo count: {mural.photosCollection.items.length}</p>
-          <MuralCard cover={mural.photosCollection.items[0]} />
-        </div>
-      ))}
+    <div className="home">
+      home is where the heart is
     </div>
   );
 }
