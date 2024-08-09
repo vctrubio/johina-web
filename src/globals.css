@@ -100,20 +100,76 @@ body {
 }
 
 nav {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: .5em 1em;
   align-items: center;
   gap: 1em;
 
-  >*{
-    padding: .2em .5em;
+  >* {
+    padding: 2em 1em;
     border-bottom: 4px solid transparent;
     border-radius: 0px;
     font-weight: 600;
   }
+
   >*:hover {
     border-bottom: 4px solid var(--c1);
   }
+
+  #logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid var(--c1);
+    height: 116px;
+    width: 116px;
+    padding: 0 !important;
+    border: none !important;
+  }
+}
+
+.swiper {
+  border: 1px solid var(--b3);
+  width: 80%;
+  height: 650px;
+  margin: 1.6em auto;
+}
+
+.swiper-insta{
+  width: 100%;
+  height: 240px;
+  background-color: var(--b3);
+}
+
+.home {
+  margin: 4em 0;
+
+  h1 {
+    font-weight: 900;
+    font-size: 55px;
+    text-align: center;
+    padding: .2em 0;
+  }
+
+  .childs {
+    display: flex;
+    justify-content: center;
+    height: 95vh;
+
+    >* {
+      border: 1px solid var(--b3);
+      width: 100%;
+    }
+  }
+}
+
+
+@media screen and (max-width: 896px) {
+  nav {
+    gap: 0
+  }
+
+  /* later to burger */
 }

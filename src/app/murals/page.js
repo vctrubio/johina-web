@@ -4,7 +4,7 @@ import { MuralCard } from "@/components/MuralCoverCard";
 const MuralsContainer = async () => {
     const data = fetchAllContenful();
     const murals = (await data).muralCollection.items;
-    console.log(murals);
+    // console.log(murals);
 
     return (<div className="m-container">
         {murals.map((mural) => (

@@ -29,8 +29,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={titilliumWeb.className}>
-        <TitleBar />
         <NavBar />
+        {/* <TitleBar /> */}
         {children}
       </body>
     </html>
