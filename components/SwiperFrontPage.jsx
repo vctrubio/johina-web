@@ -9,10 +9,10 @@ import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-export const SwiperHome = () => {
-    //to do is fetch from contenful + create model
-    const imgs = ["/slider/b.png", "/slider/a.png", "/slider/c.png", "/slider/d.png", "/slider/e.png"];
+//to do is fetch from contenful + create model
+const imgs = ["/slider/b.png", "/slider/a.png", "/slider/c.png", "/slider/d.png", "/slider/e.png"];
 
+export const SwiperHome = () => {
     return (
         <Swiper
             modules={[Navigation, Autoplay]}
@@ -32,4 +32,25 @@ export const SwiperHome = () => {
     );
 };
 
-export default SwiperHome;
+export const InstaSwiperComponent = () => {
+    return (
+        <div className="swiper-insta">
+            <Swiper
+                modules={[Navigation, Autoplay]}
+                spaceBetween={65}
+                slidesPerView={3}
+                loop={true}
+                autoplay={{ delay: 0, disableOnInteraction: false }}
+                speed={4000}
+            >
+                <div className='swiper-insta-footer'>
+                    {imgs.map((img, i) => (
+                        <SwiperSlide key={i}>
+                            <Image width={80} height={40} src={img} alt={`Slide ${i + 1}`} />
+                        </SwiperSlide>
+                    ))}
+                </div>
+            </Swiper>
+        </div>
+    )
+}

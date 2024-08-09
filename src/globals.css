@@ -118,16 +118,18 @@ nav {
     padding: .8em 1em;
     border-bottom: 4px solid transparent;
     border-radius: 0px;
-    font-weight: 600;
+    font-weight: bolder !important;
+    font-size: 1.1em;
   }
-  
+
   >*:hover:not(.active) {
     border-bottom: 4px solid var(--c1);
     transition: border-bottom 1s;
   }
-  
+
   .active {
-    font-weight: bolder; 
+    font-weight: bolder;
+    opacity: 0.6;
     /* not working idk why */
   }
 }
@@ -140,10 +142,17 @@ nav {
   border-radius: 8px;
 }
 
-.swiper-insta{
+.swiper-insta {
+  display: flex;
   width: 100%;
   height: 240px;
   background-color: var(--b3);
+
+}
+
+.swiper-insta-footer {
+  display: flex;
+  align-items: center;
 }
 
 .home {
