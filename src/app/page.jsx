@@ -1,14 +1,6 @@
 import { fetchAllContenful } from "@/lib/fetchQueries";
 import { MuralCard } from "@/components/MuralCoverCard";
-
-//Swiper {Autoplay} from 'swiper' aka also carousel
-
-const SwiperComponent = () => {
-  return (
-    <div className="swiper">
-    </div>
-  )
-}
+import { SwiperHome } from "@/components/SwiperFrontPage";
 
 const InstaSwiperComponent = () => {
   return (
@@ -32,7 +24,7 @@ const HomeComponent = () => {
 export default async function Home() {
   return (
     <div>
-      <SwiperComponent />
+      <SwiperHome/>
       <HomeComponent />
       <InstaSwiperComponent />
     </div>
