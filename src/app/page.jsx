@@ -1,5 +1,3 @@
-import { fetchAllContenful } from "@/lib/fetchQueries";
-import { MuralCard } from "@/components/MuralCoverCard";
 import { SwiperHome, InstaSwiperComponent } from "@/components/SwiperFrontPage";
 
 const HomeComponent = () => {
