@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import { SwiperHome, InstaSwiperComponent } from "@/components/SwiperFrontPage";
 
 const HomeComponent = () => {
@@ -17,6 +18,7 @@ export default async function Home() {
     <div>
       <SwiperHome/>
       <HomeComponent />
+      <Footer/>
       {/* <InstaSwiperComponent /> */}
     </div>
   );
