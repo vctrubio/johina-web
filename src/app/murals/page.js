@@ -1,6 +1,7 @@
 import { fetchAllContenful } from "@/lib/fetchQueries";
 import { MuralCard } from "@/components/MuralCoverCard";
 import SearchFilterBar from "@/components/SearchFilterBar";
+import { Footer } from "@/components/footer";
 
 const MuralsContainer = async () => {
   const data = fetchAllContenful();
