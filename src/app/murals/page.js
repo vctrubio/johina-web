@@ -1,19 +1,24 @@
 import { fetchAllContenful } from "@/lib/fetchQueries";
 import { MuralCard } from "@/components/MuralCoverCard";
+import SearchFilterBar from "@/components/SearchFilterBar";
 
 const MuralsContainer = async () => {
-    const data = fetchAllContenful();
-    const murals = (await data).muralCollection.items;
-    // console.log(murals);
+  const data = fetchAllContenful();
+  const murals = (await data).muralCollection.items;
+  // console.log(murals);
 
-    return (<div className="m-container">
+  return (
+    <>
+      <SearchFilterBar />
+      <div className="m-container">
         {murals.map((mural) => (
-            <div key={mural.title} className="m-item">
-                <MuralCard prop={mural} />
-            </div>
+          <div key={mural.title} className="m-item">
+            <MuralCard prop={mural} />
+          </div>
         ))}
-        
-    </div>);
+      </div >
+    </>
+  );
 }
 
 export default MuralsContainer;
