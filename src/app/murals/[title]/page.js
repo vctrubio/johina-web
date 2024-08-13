@@ -1,11 +1,15 @@
+'use client'
 import { slugTitle, titleSlug } from "@/utils";
 import { fetchMuralById } from "@/lib/fetchQueries"
+import Image from "next/image";
+
+import { WhatsappShareButton, EmailShareButton, WhatsappIcon, EmailIcon } from 'react-share';
 
 const MuralIdPhotos = ({ photos }) => {
     return (
         <div className="mural-id-photos">
             {photos.map((photo, index) => (
-                <img key={index} src={photo.url} alt={photo.title}  />
+                <img key={index} src={photo.url} alt={photo.title} />
             ))}
         </div>
     );
@@ -21,15 +25,37 @@ const MuralId = async ({ params }) => {
         return <>NO data found</>
     }
 
+    // const shareUrl = window.location.href; // Current page URL
+    const shareUrl = "1234"
+    const title = ptr ? ptr.title : 'Check this out!';
+
     return (
-        <div className="border" style={{ margin: 'auto' }}>
+        <div className="border" style={{ margin: 'auto', borderRadius: '10px', width: '90%' }}>
             {ptr ? (
                 <div className="mural-id-container">
-                    <h1>{ptr.title}</h1>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h1>{ptr.title}</h1>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            {/* <WhatsappShareButton url={shareUrl} title={title}>
+                                <WhatsappIcon size={34} round />
+                            </WhatsappShareButton>
+                            <EmailShareButton url={shareUrl} subject={title} body="Check this out!">
+                                <EmailIcon size={34} round />
+                            </EmailShareButton> */}
+                            <div style={{ marginTop: '10px' }}>
+                                <Image
+                                    src="/share.svg"
+                                    alt="Share"
+                                    width={34}
+                                    height={34}
+                                />
+                            </div>
+                        </div>
+                    </div>
                     <MuralIdPhotos photos={ptr.photosCollection.items} />
                     <div className="elements">
-                        <p>{ptr.description} asldjlaksdja asd f asdf asfd as dfasasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas d d asldjlaksdja asd f asdf asfd as dfas d</p>
-                        <p style={{minWidth: '140px', height: '42px', textAlign: 'right', border: '1px solid black', paddingRight: '2px'}}>Location: {ptr.location}</p>
+                        <p>{ptr.description} asldjlaksdja asd f asdf asfd as dfasasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas d d asldjlaksdja asd f asdf asfd as dfas d</p>
+                        <p style={{ minWidth: '140px', height: '42px', textAlign: 'right', paddingRight: '2px' }}>Location: {ptr.location}</p>
                     </div>
                 </div>
             ) : <h1>Not found page</h1>}

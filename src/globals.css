@@ -224,11 +224,11 @@ nav {
   justify-content: flex-start;
   align-items: center;
   max-width: 1000px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: auto;
 
   .mural-id-photos {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 400px;
   }
 
