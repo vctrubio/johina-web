@@ -194,7 +194,7 @@ nav {
     padding: 8px;
   }
 
-  #height{
+  #height {
     height: 51px;
   }
 
@@ -216,6 +216,42 @@ nav {
   }
 
 }
+
+.mural-id-container {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 1000px;
+  border: 1px solid black;
+  margin: auto;
+
+  .mural-id-photos {
+    border: 1px solid black;
+    height: 400px;
+  }
+
+  .elements {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  >* {
+    width: 100%;
+  }
+
+  h1 {
+    font-weight: 200;
+    font-size: 42px;
+    text-align: left;
+    width: 100%;
+  }
+
+}
+
+
+
 
 @media screen and (max-width: 896px) {
   nav {
