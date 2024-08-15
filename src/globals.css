@@ -189,13 +189,13 @@ nav {
 
   input {
     background-color: var(--c4);
-    border: 1px solid grey;
-    border-radius: 10px;
+    border: 1px solid rgb(207, 199, 199);
+    border-radius: 5px;
     padding: 8px;
   }
 
   #height {
-    height: 51px;
+    height: 48px;
   }
 
   input:focus {
@@ -250,8 +250,22 @@ nav {
 
 }
 
-
-
+.sticky-scroll-container{
+  margin-top: 8px;
+  height: 80vh;
+  scroll-snap-type: y mandatory; /* Enable snap scrolling in the y direction */
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  
+  .sticky-scroll{
+    scroll-snap-align: start;
+  
+    background-color: var(--c1);
+    position: sticky;
+    height: 80vh;
+    /* top: 0; */
+  }
+}
 
 @media screen and (max-width: 896px) {
   nav {
