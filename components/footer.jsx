@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import SVG from 'react-inlinesvg';
 import whatsappSVG from '../svgs/whatsapp-black.svg';
 import phoneSVG from '../svgs/phone-black.svg';
@@ -6,21 +7,57 @@ import mailSVG from '../svgs/mail-black.svg';
 import instagramSVG from '../svgs/insta-black.svg';
 import './footer.css';
 
+const icons = [
+    {
+        href: "https://wa.me/+34609988138",
+        src: whatsappSVG.src,
+        tooltip: "+34 609 98 81 38"
+    },
+    {
+        href: "tel:+34609988138",
+        src: phoneSVG.src,
+        tooltip: "+34 609 98 81 38"
+    },
+    {
+        href: "https://www.instagram.com/johinagconcheso/",
+        src: instagramSVG.src,
+        tooltip: "johinagconcheso",
+        target: "_blank",
+        rel: "noopener noreferrer"
+    },
+    {
+        href: "mailto:johina22@gmail.com",
+        src: mailSVG.src,
+        tooltip: "johina22@gmail.com"
+    }
+];
+
 export const Footer = () => {
+    const [targetText, setTargetText] = useState('');
+
+    const handleClick = (href) => {
+        window.location.href = href;
+    };
+
     return (
         <footer>
-            <a href="https://wa.me/+34630199112">
-                <SVG src={whatsappSVG.src} className='svg-icon' />
-            </a>
-            <a href="tel:+34630199112">
-                <SVG src={phoneSVG.src} className='svg-icon' />
-            </a>
-            <a href="https://www.instagram.com/alicia.agosti.interiorismo/" target="_blank" rel="noopener noreferrer">
-                <SVG src={instagramSVG.src} className='svg-icon' />
-            </a>
-            <a href="mailto:estudio@aliciaagosti.com">
-                <SVG src={mailSVG.src} className='svg-icon' />
-            </a>
+            <div className="target-text">
+                {targetText}
+            </div>
+            <div className="icon-struct">
+                {icons.map((icon, index) => (
+                    <div
+                        className="icon-wrapper"
+                        key={index}
+                        onMouseEnter={() => setTargetText(icon.tooltip)}
+                        onClick={() => handleClick(icon.href)}
+                    >
+                        <a href={icon.href} target={icon.target} rel={icon.rel}>
+                            <SVG src={icon.src} className='svg-icon' />
+                        </a>
+                    </div>
+                ))}
+            </div>
         </footer>
     );
 };
