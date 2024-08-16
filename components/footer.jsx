@@ -11,12 +11,12 @@ const icons = [
     {
         href: "https://wa.me/+34609988138",
         src: whatsappSVG.src,
-        tooltip: "+34 609 98 81 38"
+        tooltip: "+34 609 988 138"
     },
     {
         href: "tel:+34609988138",
         src: phoneSVG.src,
-        tooltip: "+34 609 98 81 38"
+        tooltip: "+34 609 988 138"
     },
     {
         href: "https://www.instagram.com/johinagconcheso/",
