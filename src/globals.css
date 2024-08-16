@@ -17,6 +17,20 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, '';
   --background-end-rgb: 255, 255, 255;
+
+  --max-width: 1200px;
+
+  --iphone-width: 400px;
+  --iphone-height: calc(var(--iphone-width) * 2);
+
+  /* Derived values */
+  --border-width: 8px;
+  --screen-width: calc(var(--iphone-width) - 2 * var(--border-width));
+  --screen-height: calc(var(--iphone-height) - 2 * var(--border-width));
+  --border-radius: calc(var(--iphone-width) * 0.14);
+  --notch-width: calc(var(--screen-width) * 0.7);
+  --notch-height: calc(var(--notch-width) * 0.175);
+
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -136,7 +150,7 @@ nav {
 
 .swiper {
   width: 80%;
-  max-width: 1200px;
+  max-width: var(--max-width);
   height: 700px;
   margin: 2em auto;
   border-radius: 8px;
@@ -159,16 +173,95 @@ nav {
   margin: 6em 0;
 
   .childs {
-    display: flex;
+    display: grid;
     justify-content: center;
+    align-content: center;
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+
     height: 95vh;
+    max-width: var(--max-width);
+    margin: 0 auto;
 
     >* {
-      border: 1px solid var(--b3);
-      width: 100%;
+      margin: 0 auto;
     }
   }
+
+  /* .child-text {
+    padding-top: 1em;
+
+    p {
+      margin-bottom: 1em;
+      font-size: 1.2em;
+    }
+
+    span{
+      font-weight: bolder;
+    }
+  } */
+
 }
+
+.iphone {
+  width: var(--iphone-width);
+  height: var(--iphone-height);
+  background-color: #000;
+  border-radius: var(--border-radius);
+  position: relative;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  border: var(--border-width) solid #333;
+
+  .screen {
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: #fff;
+    border-radius: calc(var(--border-radius) - 10px);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .notch-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .notch {
+    width: var(--notch-width);
+    height: var(--notch-height);
+    background-color: #000;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    position: relative;
+    /* margin-top: 8px; */
+  }
+
+  .camera {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+  }
+
+  .speaker {
+    width: 60px;
+    height: 6px;
+    background-color: #333;
+    border-radius: 3px;
+  }
+}
+
 
 .search-bar {
   /* border: 1px solid var(--b3); */
@@ -250,16 +343,17 @@ nav {
 
 }
 
-.sticky-scroll-container{
+.sticky-scroll-container {
   margin-top: 8px;
   height: 80vh;
-  scroll-snap-type: y mandatory; /* Enable snap scrolling in the y direction */
+  scroll-snap-type: y mandatory;
+  /* Enable snap scrolling in the y direction */
   overflow-y: scroll;
   scroll-behavior: smooth;
-  
-  .sticky-scroll{
+
+  .sticky-scroll {
     scroll-snap-align: start;
-  
+
     background-color: var(--c1);
     position: sticky;
     height: 80vh;
@@ -267,9 +361,81 @@ nav {
   }
 }
 
+/* General text styling */
+.child-text {
+  font-family: 'Georgia', serif;
+  line-height: 1.7;
+  color: #2c3e50;
+  font-size: 20px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+}
+
+/* Emphasized words styling */
+.emphasis-word {
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 5px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Italic words styling */
+.italic-word {
+  font-style: italic;
+  font-weight: 600; /* Slightly bolder for emphasis */
+  background: linear-gradient(to right, var(--b2), rgb(10, 229, 203)); /* Gradient text color */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Highlighted words for locations and projects */
+.highlight {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  font-size: 22px;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+
+/* Flex-wrap around emphasized words */
+.child-text p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.child-text p > span {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.blue-highlight {
+  background-color: #e0f7fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 896px) {
   nav {
     gap: 0
+  }
+
+  .home .childs {
+    display: flex;
+    flex-direction: column-reverse; /* Reverse the order of the children */
   }
 
   /* later to burger */
