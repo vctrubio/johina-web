@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SVG from 'react-inlinesvg';
 import whatsappSVG from '../svgs/whatsapp-black.svg';
 import phoneSVG from '../svgs/phone-black.svg';
@@ -34,6 +34,18 @@ const icons = [
 
 export const Footer = () => {
     const [targetText, setTargetText] = useState('');
+    const [fade, setFade] = useState(false);
+
+    useEffect(() => {
+        if (targetText) {
+            setFade(true);
+            const timeout = setTimeout(() => {
+                setFade(false);
+                setTimeout(() => setTargetText(''), 300);
+            }, 3000);
+            return () => clearTimeout(timeout);
+        }
+    }, [targetText]);
 
     const handleClick = (href) => {
         window.location.href = href;
