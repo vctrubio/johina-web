@@ -1,6 +1,6 @@
 import { Footer } from "@/components/footer";
 import { SwiperHome } from "@/components/SwiperFrontPage";
-import Iphone  from "@/components/Iphone";
+import Iphone from "@/components/Iphone";
 
 const HomeComponent = () => {
   return (
@@ -29,7 +29,6 @@ export default async function Home() {
     <div>
       <SwiperHome />
       <HomeComponent />
-      {/* <InstaSwiperComponent /> */}
     </div>
   );
 }
