@@ -1,7 +1,6 @@
 import { Footer } from "@/components/footer";
 import { SwiperHome, InstaSwiperComponent } from "@/components/SwiperFrontPage";
 
-
 const Iphone = () => {
   return (
     <div className="iphone">
@@ -22,7 +21,6 @@ const HomeComponent = () => {
     <div className="home">
       <div className="childs">
         <Iphone className="iphone" />
-
         <div className="child-text">
           <p>
             <span className="emphasis-word">Johina</span> is a <span className="italic-word">celebrated muralist</span> who has been transforming spaces with her art since 1987.
@@ -33,6 +31,7 @@ const HomeComponent = () => {
           <p>
             With a Master’s from <span className="blue-highlight">Christie’s in Art History</span> and a background in restoration, Johina's artistry <span className="italic font-bold mr-2">blends tradition</span> with contemporary flair.
           </p>
+          <Footer />
         </div>
       </div>
     </div>
@@ -44,7 +43,6 @@ export default async function Home() {
     <div>
       <SwiperHome />
       <HomeComponent />
-      <Footer />
       {/* <InstaSwiperComponent /> */}
     </div>
   );
