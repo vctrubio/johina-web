@@ -400,7 +400,7 @@ nav {
 .italic-word {
   font-style: italic;
   font-weight: 600; /* Slightly bolder for emphasis */
-  background: linear-gradient(to right, var(--b2), rgb(221, 193, 35)); /* Gradient text color */
+  background: linear-gradient(to right, var(--b2), rgb(238, 191, 0)); /* Gradient text color */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
