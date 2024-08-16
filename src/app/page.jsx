@@ -1,20 +1,6 @@
 import { Footer } from "@/components/footer";
-import { SwiperHome, InstaSwiperComponent } from "@/components/SwiperFrontPage";
-
-const Iphone = () => {
-  return (
-    <div className="iphone">
-      <div className="screen">
-        <div className="notch-container">
-          <div className="notch">
-            <div className="camera"></div>
-            <div className="speaker"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+import { SwiperHome } from "@/components/SwiperFrontPage";
+import Iphone  from "@/components/Iphone";
 
 const HomeComponent = () => {
   return (
