@@ -33,7 +33,7 @@ const icons = [
 ];
 
 export const Footer = () => {
-    const text = ""
+    const text = "Get in touch!"
     const [targetText, setTargetText] = useState(text);
     const [fade, setFade] = useState(false);
 
