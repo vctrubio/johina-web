@@ -6,6 +6,7 @@ import phoneSVG from '../svgs/phone-black.svg';
 import mailSVG from '../svgs/mail-black.svg';
 import instagramSVG from '../svgs/insta-black.svg';
 import './footer.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const icons = [
     {
@@ -54,9 +55,17 @@ export const Footer = () => {
 
     return (
         <footer>
-            <div className="target-text">
-                {targetText}
-            </div>
+            <TransitionGroup>
+                <CSSTransition
+                    key={targetText}
+                    timeout={1000}
+                    classNames="target-text"
+                >
+                    <div className="target-text">
+                        {targetText}
+                    </div>
+                </CSSTransition>
+            </TransitionGroup>
             <div className="icon-struct">
                 {icons.map((icon, index) => (
                     <div
