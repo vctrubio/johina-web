@@ -2,6 +2,8 @@
 import { slugTitle, titleSlug } from "@/utils";
 import { fetchMuralById } from "@/lib/fetchQueries"
 import Image from "next/image";
+import SVG from 'react-inlinesvg';
+import Location from "@/svgs/location.svg";
 
 import { WhatsappShareButton, EmailShareButton, WhatsappIcon, EmailIcon } from 'react-share';
 
@@ -30,7 +32,7 @@ const MuralId = async ({ params }) => {
     const title = ptr ? ptr.title : 'Check this out!';
 
     return (
-        <div className="border" style={{ margin: 'auto', borderRadius: '10px', width: '90%' }}>
+        <div style={{ margin: 'auto', borderRadius: '10px', width: '90%' }}>
             {ptr ? (
                 <div className="mural-id-container">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -55,7 +57,15 @@ const MuralId = async ({ params }) => {
                     <MuralIdPhotos photos={ptr.photosCollection.items} />
                     <div className="elements">
                         <p>{ptr.description} asldjlaksdja asd f asdf asfd as dfasasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas dasldjlaksdja asd f asdf asfd as dfas d d asldjlaksdja asd f asdf asfd as dfas d</p>
-                        <p style={{ minWidth: '140px', height: '42px', textAlign: 'right', paddingRight: '2px' }}>Location: {ptr.location}</p>
+                        <div className="elements-info">
+                            <div>
+                                {ptr.location}
+                                <SVG src={Location.src} width={20} height={20} />
+                            </div>
+                            <div >
+                                "Category"
+                            </div>
+                        </div>
                     </div>
                 </div>
             ) : <h1>Not found page</h1>}

@@ -330,6 +330,19 @@ nav {
     justify-content: space-between;
   }
 
+  .elements-info{
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+
+    >*{
+      display: flex;
+      gap: 4px;
+      justify-content: right;
+      color: var(--b3);
+    }
+  }
+
   >* {
     width: 100%;
   }
