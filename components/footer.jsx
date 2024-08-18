@@ -33,7 +33,8 @@ const icons = [
 ];
 
 export const Footer = () => {
-    const [targetText, setTargetText] = useState('');
+    const text = ""
+    const [targetText, setTargetText] = useState(text);
     const [fade, setFade] = useState(false);
 
     useEffect(() => {
@@ -41,7 +42,7 @@ export const Footer = () => {
             setFade(true);
             const timeout = setTimeout(() => {
                 setFade(false);
-                setTimeout(() => setTargetText(''), 300);
+                setTimeout(() => setTargetText(text), 300);
             }, 3000);
             return () => clearTimeout(timeout);
         }
