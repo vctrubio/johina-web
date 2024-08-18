@@ -1,4 +1,5 @@
 footer {
+    position: relative;
     color: white;
     font-size: 24px;
     height: 100px;
@@ -27,15 +28,55 @@ footer {
     margin: 0 2px;
     opacity: 0.6;
     text-decoration: none;
+    transition: all .3s;
+
+    &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    &:active {
+        transform: translateY(-20%)
+    }
 }
 
-.svg-icon:hover {
-    opacity: 1;
-    transform: scale(1.2);
-}   
-
-.target-text{
-    color: var(--b3);
-    opacity: 0.5;
+.target-text {
+    position: absolute;
     height: 42px;
+    top: -50%;
+    opacity: 0.5;
+    color: var(--b3);
+    transition: transform 1s;
+    animation: move-up-g 1.5s ;
+}
+
+.target-text-enter {
+    transform: translateY(20px); /* Start from below */
+    opacity: 0;
+    transition: transform 1s, opacity 2s; /* Slow opacity transition */
+}
+
+.target-text-enter-active {
+    transform: translateY(0); /* Move to original position */
+    opacity: 0.5;
+    transition: transform 1s, opacity 2s; /* Slow opacity transition */
+}
+
+.target-text-exit {
+    transform: translateY(0); /* Start from original position */
+    opacity: 0.5;
+    transition: transform 1s, opacity 0.1s; /* Immediate opacity transition */
+}
+
+.target-text-exit-active {
+    transform: translateY(20px); /* Move up on exit */
+    opacity: 0;
+}
+
+@keyframes move-up-g {
+    0% {
+        transform: translateY(+20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
