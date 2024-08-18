@@ -4,8 +4,9 @@ import { fetchMuralById } from "@/lib/fetchQueries"
 import Image from "next/image";
 import SVG from 'react-inlinesvg';
 import Location from "@/svgs/location.svg";
+import { ShareComponent } from "@/components/ShareMe";
 
-import { WhatsappShareButton, EmailShareButton, WhatsappIcon, EmailIcon } from 'react-share';
+// import { usePathname } from "next/navigation";
 
 const MuralIdPhotos = ({ photos }) => {
     return (
@@ -27,8 +28,8 @@ const MuralId = async ({ params }) => {
         return <>NO data found</>
     }
 
-    // const shareUrl = window.location.href; // Current page URL
-    const shareUrl = "1234"
+    // const shareUrl = usePathname()
+    const shareUrl = 'abc'
     const title = ptr ? ptr.title : 'Check this out!';
 
     return (
@@ -38,12 +39,6 @@ const MuralId = async ({ params }) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h1>{ptr.title}</h1>
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            {/* <WhatsappShareButton url={shareUrl} title={title}>
-                                <WhatsappIcon size={34} round />
-                            </WhatsappShareButton>
-                            <EmailShareButton url={shareUrl} subject={title} body="Check this out!">
-                                <EmailIcon size={34} round />
-                            </EmailShareButton> */}
                             <div style={{ marginTop: '10px' }}>
                                 <Image
                                     src="/share.svg"
