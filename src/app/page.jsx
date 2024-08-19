@@ -17,7 +17,7 @@ const HomeComponent = () => {
           <p>
             With a Master’s from <span className="blue-highlight">Christie’s in Art History</span> and a background in restoration, Johina's artistry <span className="italic font-bold mr-2">blends tradition</span> with contemporary flair.
           </p>
-          <Footer />
+          <Footer className="child-footer" />
         </div>
       </div>
     </div>

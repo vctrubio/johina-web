@@ -1,8 +1,7 @@
 const TitleBar = () => {
     return (
-        // <div className="title-bar">
-        <div style={{marginTop: '1em', cursor: 'text'}}>
-            <h1>Johina</h1>
+        <div id='title-bar'>
+            <h1>Johina G. Concheso</h1>
         </div>);
 }
 
