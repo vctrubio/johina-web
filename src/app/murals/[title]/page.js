@@ -12,7 +12,8 @@ const MuralIdPhotos = ({ photos }) => {
     return (
         <div className="mural-id-photos">
             {photos.map((photo, index) => (
-                <img key={index} src={photo.url} alt={photo.title} />
+                <Image key={index} src={photo.url} alt={photo.title} width={800} height={400} />
+                //this needs to grab the width and height to make it adjustable
             ))}
         </div>
     );

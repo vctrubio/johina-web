@@ -1,8 +1,11 @@
 'use client'
+import Image from "next/image";
 import React, { useState } from 'react';
 import './info.css';
 
+
 export const Icons = ({ contacts }) => {
+    const xandy = 60;
     const titleFilter = ["Phone", "Mail", "Instagram"];
     const contactName = {
         name: "Johina Concheso",
@@ -25,13 +28,13 @@ export const Icons = ({ contacts }) => {
                     <div>
                         {contactName.title}
                     </div>
-                </div>
+                </div>z
             </div>
             <div>
                 {orderedContacts.map((contact, index) => (
                     <div key={index} className='info-icon-itr'>
                         <a href={contact.href} target={contact.target || "_self"} rel={contact.rel || ""}>
-                            <img src={contact.src} alt={contact.title} className='svg-icon'/>
+                            <Image src={contact.src} alt={contact.title} width={xandy} height={xandy} className='svg-icon' />
                             <div className='info-icon-text'>
                                 {contact.tooltip}
                             </div>
