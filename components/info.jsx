@@ -28,7 +28,7 @@ export const Icons = ({ contacts }) => {
                     <div>
                         {contactName.title}
                     </div>
-                </div>z
+                </div>
             </div>
             <div>
                 {orderedContacts.map((contact, index) => (
