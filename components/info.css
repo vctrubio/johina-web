@@ -5,6 +5,9 @@
     cursor: default;
     width: 420px;
     margin: 0 auto;
+    >*{
+        align-items: center;
+    }
 }
 
 
@@ -21,6 +24,7 @@
             background-color: var(--c2);
             text-decoration: none;
             transition: 1s;
+            /* // later animation from left to right */
         }
         .svg-icon{
             transform: scale(1.1);
