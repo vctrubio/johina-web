@@ -1,37 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import SVG from 'react-inlinesvg';
-import whatsappSVG from '../svgs/whatsapp-black.svg';
-import phoneSVG from '../svgs/phone-black.svg';
-import mailSVG from '../svgs/mail-black.svg';
-import instagramSVG from '../svgs/insta-black.svg';
-import './footer.css';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-const icons = [
-    {
-        href: "https://wa.me/+34609988138",
-        src: whatsappSVG.src,
-        tooltip: "+34 609 988 138"
-    },
-    {
-        href: "tel:+34609988138",
-        src: phoneSVG.src,
-        tooltip: "+34 609 988 138"
-    },
-    {
-        href: "https://www.instagram.com/johinagconcheso/",
-        src: instagramSVG.src,
-        tooltip: "johinagconcheso",
-        target: "_blank",
-        rel: "noopener noreferrer"
-    },
-    {
-        href: "mailto:johina22@gmail.com",
-        src: mailSVG.src,
-        tooltip: "johina22@gmail.com"
-    }
-];
+import { ContactCard as icons } from '@/lib/contactInfo';
+import './footer.css';
 
 export const Footer = () => {
     const text = "Get in touch!"
