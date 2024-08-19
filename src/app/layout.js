@@ -21,8 +21,8 @@ const titilliumWeb = Titillium_Web({
 });
 
 export const metadata = {
-  title: "Johina Murals",
-  description: "Artist Johina Murals",
+  title: "Johina's Web",
+  description: "Artist Johina Concheso's portfolio",
 };
 
 export default function RootLayout({ children }) {

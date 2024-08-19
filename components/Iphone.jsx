@@ -4,7 +4,6 @@ import { InstagramFeed } from './Instagraming';
 
 const Iphone = async () => {
     return (
-        <>
             <div className="iphone">
                 <div className="screen">
                     <InstagramFeed />
@@ -16,7 +15,6 @@ const Iphone = async () => {
                     </div>
                 </div>
             </div>
-        </>
     )
 }
 

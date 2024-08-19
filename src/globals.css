@@ -52,6 +52,17 @@ body {
   }
 }
 
+#title-bar h1{
+  margin: 26px 0 0 0;
+  font-family: fantasy;
+  font-weight: 100;
+  font-size: 42px;
+  opacity: 0.4;
+  cursor: default;
+}
+
+
+
 h1 {
   font-weight: 900;
   font-size: 55px;
@@ -171,6 +182,7 @@ nav {
 
 .home {
   margin: 6em 0;
+  border: 1px solid var(--b3);
 
   .childs {
     display: grid;
@@ -188,28 +200,14 @@ nav {
       margin: 0 auto;
     }
   }
-
-  /* .child-text {
-    padding-top: 1em;
-
-    p {
-      margin-bottom: 1em;
-      font-size: 1.2em;
-    }
-
-    span{
-      font-weight: bolder;
-    }
-  } */
-
 }
 
 .iphone {
+  position: relative;
   width: var(--iphone-width);
   height: var(--iphone-height);
   background-color: #000;
   border-radius: var(--border-radius);
-  position: relative;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
   border: var(--border-width) solid #333;
 
@@ -221,6 +219,8 @@ nav {
     margin: 0 auto;
     position: relative;
     overflow-y: scroll;
+    overflow-x: hidden;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -232,6 +232,7 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
+    
   }
 
   .notch {
@@ -330,12 +331,12 @@ nav {
     justify-content: space-between;
   }
 
-  .elements-info{
+  .elements-info {
     min-width: 140px;
     display: flex;
     flex-direction: column;
 
-    >*{
+    >* {
       display: flex;
       gap: 4px;
       justify-content: right;
@@ -377,14 +378,30 @@ nav {
 /* General text styling */
 .child-text {
   font-family: 'Georgia', serif;
+  font-size: 20px;
   line-height: 1.7;
   color: #2c3e50;
-  font-size: 20px;
+
+  position: relative;
+  height: 100%;
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
-  position: relative;
+
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  p>span {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+  }
 }
+
 
 /* Emphasized words styling */
 .emphasis-word {
@@ -394,20 +411,6 @@ nav {
   margin: 0 5px;
   line-height: 1.2;
   white-space: nowrap;
-}
-
-/* Flex-wrap around emphasized words */
-.child-text p {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.child-text p>span {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
 }
 
 /* Italic words styling */
@@ -443,12 +446,17 @@ nav {
   white-space: nowrap;
 }
 
-
-.instagram-g img {
-  transform: scale(1.1); /* Zoom in by 10% */
-  transition: transform 0.3s ease; /* Smooth transition */
+.instagram-g {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
 }
 
+.instagram-g img {
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
 
 .instagram-caption {
   padding: 40px 10px;
@@ -464,9 +472,20 @@ nav {
 
   .home .childs {
     display: flex;
-    flex-direction: column-reverse;
-    /* Reverse the order of the children */
+    flex-direction: column;
+    height: 100%;
   }
 
-  /* later to burger */
+  .childs .child-text {
+    order: 1;
+  }
+
+  .childs .iphone {
+    order: 2;
+  }
+
+  .childs .child-footer {
+    order: 3;
+  }
+
 }
