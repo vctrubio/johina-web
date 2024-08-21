@@ -1,13 +1,19 @@
+'use client'
 import React, { useState } from 'react';
 import { WhatsappShareButton, WhatsappIcon, EmailShareButton, EmailIcon } from 'react-share';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-export const ShareComponent = ({ shareUrl, title, path }) => {
+export const ShareComponent = () => {
+  const domain = 'http://localhost:3000'
+  const pathName = usePathname()
+  const path = domain + pathName
+
   const [btnToggle, setBtnToggle] = useState('off');
-
   const handleToggle = () => {
     setBtnToggle((prevState) => (prevState === 'off' ? 'on' : 'off'));
   };
+
 
   return (
     <>
@@ -21,12 +27,12 @@ export const ShareComponent = ({ shareUrl, title, path }) => {
       </div>
       {btnToggle === 'on' && (
       <div className="share-btns-z">
-        <div className='share-btns-link'>Share: Link</div>
+        <div className='share-btns-link'>{path}</div>
         <div className='share-btns-btns'>
-          <WhatsappShareButton url={shareUrl} title={title} separator=":: ">
+          <WhatsappShareButton url={path} separator=":: ">
             <WhatsappIcon size={42} round />
           </WhatsappShareButton>
-          <EmailShareButton url={shareUrl} title={title} separator=":: ">
+          <EmailShareButton url={path} separator=":: ">
             <EmailIcon size={42} round />
           </EmailShareButton>
         </div>

@@ -1,15 +1,9 @@
-'use client'
-import React, { useState } from 'react';
-import { slugTitle, titleSlug } from "@/utils";
+import { slugTitle } from "@/utils";
 import { fetchMuralById } from "@/lib/fetchQueries"
 import Image from "next/image";
 import SVG from 'react-inlinesvg';
 import Location from "@/svgs/location.svg";
 import { ShareComponent } from "@/components/ShareMe";
-import { Share } from 'next/font/google';
-import { usePathname } from 'next/navigation';
-
-// import { usePathname } from "next/navigation";
 
 const MuralIdPhotos = ({ photos }) => {
     return (
@@ -23,9 +17,7 @@ const MuralIdPhotos = ({ photos }) => {
 }
 
 const MuralId = async ({ params }) => {
-    const [mural, setMural] = useState(null);
     let ptr;
-
     try {
         ptr = await fetchMuralById(slugTitle(params.title))
         ptr = ptr['muralCollection']['items'][0];
@@ -33,17 +25,13 @@ const MuralId = async ({ params }) => {
         return <>NO data found</>
     }
 
-    // const shareUrl = usePathname()
-    const shareUrl = 'abc'
-    const title = ptr ? ptr.title : 'Check this out!';
-
     return (
         <div style={{ margin: 'auto', borderRadius: '10px', width: '90%' }}>
             {ptr ? (
                 <div className="mural-id-container">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h1>{ptr.title}</h1>
-                        <ShareComponent/> 
+                        <ShareComponent/>
                     </div>
                     <MuralIdPhotos photos={ptr.photosCollection.items} />
                     <div className="elements">
