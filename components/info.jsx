@@ -21,7 +21,7 @@ export const Icons = ({ contacts }) => {
         <div className='info-icons'>
             <div className='info-icon-title'>
                 <div className='avatar' style={{ backgroundImage: 'url(/jj.png)' }}></div>
-                <div className='name'>
+                <div className='name' hello-world="how">
                     <div>
                         {contactName.name}
                     </div>

@@ -1,10 +1,13 @@
 'use client'
+import React, { useState } from 'react';
 import { slugTitle, titleSlug } from "@/utils";
 import { fetchMuralById } from "@/lib/fetchQueries"
 import Image from "next/image";
 import SVG from 'react-inlinesvg';
 import Location from "@/svgs/location.svg";
 import { ShareComponent } from "@/components/ShareMe";
+import { Share } from 'next/font/google';
+import { usePathname } from 'next/navigation';
 
 // import { usePathname } from "next/navigation";
 
@@ -20,6 +23,7 @@ const MuralIdPhotos = ({ photos }) => {
 }
 
 const MuralId = async ({ params }) => {
+    const [mural, setMural] = useState(null);
     let ptr;
 
     try {
@@ -39,16 +43,7 @@ const MuralId = async ({ params }) => {
                 <div className="mural-id-container">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h1>{ptr.title}</h1>
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                            <div style={{ marginTop: '10px' }}>
-                                <Image
-                                    src="/share.svg"
-                                    alt="Share"
-                                    width={34}
-                                    height={34}
-                                />
-                            </div>
-                        </div>
+                        <ShareComponent/> 
                     </div>
                     <MuralIdPhotos photos={ptr.photosCollection.items} />
                     <div className="elements">

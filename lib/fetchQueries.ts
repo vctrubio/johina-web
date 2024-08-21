@@ -28,7 +28,7 @@ export const fetchAllContenful = async () => {
 }
 
 export const fetchMuralById = async (titleId: string) => {
-    console.log('check id ,', titleId)
+    // console.log('check id ,', titleId)
     const query = `#graphql
         query MuralCollection($where: MuralFilter) {
             muralCollection(where: $where) {
