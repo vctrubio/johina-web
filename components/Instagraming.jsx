@@ -6,10 +6,10 @@ export const InstagramCard = ({ media }) => {
             <a href={media.permalink} target="_blank" rel="noopener noreferrer">
                 <Image
                     src={media.media_url}
-                    alt={media.caption}
-                    width={800}
-                    height={800}
-                    unoptimized={true}
+                    alt={media.caption || 'Instagram src'}
+                    width={600}
+                    height={600}
+                    unoptimized //must be commented for dev
                 />
                 <p className="instagram-caption">{media.caption}</p>
             </a>
@@ -64,10 +64,11 @@ const sortInstagramCategory = async () => {
 
 
 
-
 export const InstagramFeed = async () => {
+    /* NOTE, THERE IS NO EDGES, ALBUMS ECT*/
 
-    const {igMedia}  = await sortInstagramCategory();
+    const { igMedia, igAlbum, igVideo } = await sortInstagramCategory()
+
     return (
         <div className='w-full'>
             {igMedia.map((media, index) => (
@@ -83,7 +84,5 @@ Intagram media_type
 - CAROUSEL_ALBUM
 - VIDEO
 - IMAGE
-
-
 
 */
