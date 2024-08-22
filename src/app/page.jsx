@@ -53,17 +53,46 @@ const HomeComponent = async () => {
 
   const { igMedia, igAlbum, igVideo } = await sortInstagramCategory()
 
+  const looping = ({ content }) => {
+
+    content.map((media, index) => {
+      console.log("🚀 ~ looping ~ media:", media);
+      console.log(`🚀 ~ looping ~ index: ${index} ~ media: ${media}`)
+    }
+    )
+  }
+
+  looping({ content: igAlbum, flag:true })
+
   return (
     <div className="home">
       <div className="childs">
 
-        <div>
+        {/* <div>
           <div className="text-center font-bold mb-1">Photos</div>
           <Iphone className="iphone">
             <InstagramFeed content={igMedia} />
           </Iphone>
+        </div> */}
+
+        <div className="border w-full flex flex-col space-y-2">
+            <div>albums</div>
+            {igAlbum.map((media, index) => (
+              <div key={index}>
+                {media.id}
+              </div>
+            ))}
+        </div>
+        <div className="border w-full flex flex-col space-y-2">
+            <div>albums</div>
+            {igVideo.map((media, index) => (
+              <div key={index}>
+                {media.id}
+              </div>
+            ))}
         </div>
 
+        
         {/* <div>
           <div className="text-center font-bold mb-1">Albums</div>
           <Iphone className="iphone">
@@ -72,7 +101,7 @@ const HomeComponent = async () => {
         </div>
           
         // this is the idea but its not working
-        
+
         <div>
           <div className="text-center font-bold mb-1">Videos</div>
           <Iphone className="iphone">
@@ -80,9 +109,10 @@ const HomeComponent = async () => {
           </Iphone>
         </div> */}
 
-          
 
-        <div className="child-text">
+
+
+        {/* <div className="child-text">
           <p>
             <span className="emphasis-word">Johina</span> is a <span className="italic-word">celebrated muralist</span> who has been transforming spaces with her art since 1987.
           </p>
@@ -93,7 +123,8 @@ const HomeComponent = async () => {
             With a Master’s from <span className="blue-highlight">Christie’s in Art History</span> and a background in restoration, Johina's artistry <span className="italic font-bold mr-2">blends tradition</span> with contemporary flair.
           </p>
           <Footer className="child-footer" />
-        </div>
+        </div> */}
+
       </div>
     </div>
   )
