@@ -9,6 +9,7 @@ export const InstagramCard = ({ media }) => {
                     alt={media.caption}
                     width={800}
                     height={800}
+                    unoptimized={true}
                 />
                 <p className="instagram-caption">{media.caption}</p>
             </a>
