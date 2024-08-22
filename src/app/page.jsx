@@ -1,12 +1,15 @@
 import { Footer } from "@/components/footer";
 import { SwiperHome } from "@/components/SwiperFrontPage";
 import Iphone from "@/components/Iphone";
+import { InstagramFeed } from "@/components/Instagraming";
 
 const HomeComponent = () => {
   return (
     <div className="home">
       <div className="childs">
-        <Iphone className="iphone" />
+        <Iphone className="iphone">
+          <InstagramFeed />
+        </Iphone>
         <div className="child-text">
           <p>
             <span className="emphasis-word">Johina</span> is a <span className="italic-word">celebrated muralist</span> who has been transforming spaces with her art since 1987.
@@ -27,7 +30,7 @@ const HomeComponent = () => {
 export default function Home() {
   return (
     <div>
-      <SwiperHome />
+      {/* <SwiperHome /> */}
       <HomeComponent />
     </div>
   );
