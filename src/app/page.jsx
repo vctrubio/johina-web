@@ -41,44 +41,47 @@ const sortInstagramCategory = async () => {
 }
 
 const HomeComponent = async () => {
-
-  const { igMedia, igAlbum, igVideo } = await sortInstagramCategory()
+  const { igMedia, igVideo } = await sortInstagramCategory()
 
   const looping = ({ content }) => {
-
     content.map((media, index) => {
       console.log("🚀 ~ looping ~ media:", media);
       // console.log(`🚀 ~ looping ~ index: ${index} ~ media: ${media}`)
     }
     )
   }
-
   // looping({ content: igMedia })
 
   return (
     <div className="home">
       <div className="childs">
-
-        <div>
-          <div className="text-center font-bold mb-1">Photos</div>
-          <Iphone className="iphone">
-            <InstagramFeed content={igMedia} />
-          </Iphone>
+        <div className="flex gap-4">
+          {
+            igMedia.length > 0 && (
+              <div>
+                <div className="text-center font-bold mb-1">Photos</div>
+                <Iphone className="iphone">
+                  <InstagramFeed content={igMedia} />
+                </Iphone>
+              </div>
+            )
+          }
+          {
+            igVideo.length > 0 && (
+              <div>
+                <div className="text-center font-bold mb-1">Videos</div>
+                <Iphone className="iphone">
+                  {igVideo.map((media, index) => (
+                    <InstagramVideoFeed video={media} key={index} />
+                  ))}
+                </Iphone>
+                <div>
+                </div>
+              </div>
+            )
+          }
         </div>
-
-        <div>
-          <div className="text-center font-bold mb-1">Videos</div>
-          <Iphone className="iphone">
-            {igVideo.map((media, index) => (
-              <InstagramVideoFeed video={media} key={index}/>
-            ))}
-          </Iphone>
-          <div>
-          </div>
-        </div>
-
-
-        {/* <div className="child-text">
+        <div className="child-text">
           <p>
             <span className="emphasis-word">Johina</span> is a <span className="italic-word">celebrated muralist</span> who has been transforming spaces with her art since 1987.
           </p>
@@ -89,8 +92,7 @@ const HomeComponent = async () => {
             With a Master’s from <span className="blue-highlight">Christie’s in Art History</span> and a background in restoration, Johina's artistry <span className="italic font-bold mr-2">blends tradition</span> with contemporary flair.
           </p>
           <Footer className="child-footer" />
-        </div> */}
-
+        </div>
       </div>
     </div >
   )
@@ -99,7 +101,7 @@ const HomeComponent = async () => {
 export default function Home() {
   return (
     <div>
-      {/* <SwiperHome /> */}
+      <SwiperHome />
       <HomeComponent />
     </div>
   );

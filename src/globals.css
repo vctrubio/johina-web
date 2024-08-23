@@ -61,8 +61,6 @@ body {
   cursor: default;
 }
 
-
-
 h1 {
   font-weight: 900;
   font-size: 55px;
@@ -182,8 +180,7 @@ nav {
 
 .home {
   margin: 6em 0;
-  border: 1px solid var(--b3);
-
+  
   .childs {
     display: grid;
     justify-content: center;
@@ -193,7 +190,7 @@ nav {
     gap: 4px;
 
     height: 95vh;
-    max-width: var(--max-width);
+    max-width: var(--max-width + 100);
     margin: 0 auto;
 
     >* {
@@ -261,6 +258,11 @@ nav {
     background-color: #333;
     border-radius: 3px;
   }
+
+  ::-webkit-scrollbar {
+    width: 0px; /* Very small width of the scrollbar */
+  }
+  
 }
 
 
@@ -535,6 +537,8 @@ nav {
 
 .instagram-video-feed {
   width: 100%;
+  height: 100%;
+  /* border: 1px solid black; */
 }
 
 
@@ -562,3 +566,4 @@ nav {
   }
 
 }
+

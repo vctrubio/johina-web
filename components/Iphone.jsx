@@ -6,12 +6,12 @@ const Iphone = ({ children }) => {
         <div className="iphone">
             <div className="screen">
                 {children}
-                <div className="notch-container">
+                {/* <div className="notch-container">
                     <div className="notch">
                         <div className="camera"></div>
                         <div className="speaker"></div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
