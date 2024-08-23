@@ -1,11 +1,10 @@
 import { Footer } from "@/components/footer";
 import { SwiperHome } from "@/components/SwiperFrontPage";
 import Iphone from "@/components/Iphone";
-import { InstagramFeed } from "@/components/Instagraming";
+import { InstagramFeed, InstagramVideoFeed } from "@/components/Instagraming";
 
 const sortInstagramCategory = async () => {
-  /* NOTE, THERE IS NO EDGES, ALBUMS ECT*/
-  const fields = 'id,caption,media_url,media_type,permalink';  // Replace this with the specific fields you want, e.g., 'id,caption,media_type,media_url'
+  const fields = 'id,caption,media_url,media_type,permalink';
   const url = `https://graph.instagram.com/me/media?fields=${fields}&access_token=${process.env.INSTAGRAM_KEY}`;
   let media = null;
 
@@ -27,7 +26,6 @@ const sortInstagramCategory = async () => {
   const igMedia = []
   const igAlbum = []
   const igVideo = []
-
 
   media.data.forEach(item => {
     if (item.media_type === 'IMAGE') {
@@ -62,7 +60,7 @@ const HomeComponent = async () => {
     )
   }
 
-  looping({ content: igAlbum, flag:true })
+  looping({ content: igVideo })
 
   return (
     <div className="home">
@@ -83,16 +81,19 @@ const HomeComponent = async () => {
               </div>
             ))}
         </div>
-        <div className="border w-full flex flex-col space-y-2">
-            <div>albums</div>
-            {igVideo.map((media, index) => (
-              <div key={index}>
-                {media.id}
-              </div>
-            ))}
-        </div>
-
         
+
+
+        {/* <div className="border w-full flex flex-col space-y-2">
+            <div>videos</div>
+            {igVideo.map((media, index) => (
+              <InstagramVideoFeed video={media} />
+            ))}
+            <div>
+          </div>
+        </div> */}
+
+
         {/* <div>
           <div className="text-center font-bold mb-1">Albums</div>
           <Iphone className="iphone">
