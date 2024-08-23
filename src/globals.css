@@ -52,7 +52,7 @@ body {
   }
 }
 
-#title-bar h1{
+#title-bar h1 {
   margin: 26px 0 0 0;
   font-family: fantasy;
   font-weight: 100;
@@ -180,7 +180,7 @@ nav {
 
 .home {
   margin: 6em 0;
-  
+
   .childs {
     display: grid;
     justify-content: center;
@@ -190,8 +190,8 @@ nav {
     gap: 4px;
 
     height: 95vh;
-    max-width: var(--max-width + 100);
     margin: 0 auto;
+    max-width: 1400px;
 
     >* {
       margin: 0 auto;
@@ -229,7 +229,7 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
-    
+
   }
 
   .notch {
@@ -260,9 +260,10 @@ nav {
   }
 
   ::-webkit-scrollbar {
-    width: 0px; /* Very small width of the scrollbar */
+    width: 0px;
+    /* Very small width of the scrollbar */
   }
-  
+
 }
 
 
@@ -358,24 +359,24 @@ nav {
   }
 }
 
-[btn-toggle]{
+[btn-toggle] {
   /* background-color: green; */
   border: 1px solid var(--b3);
   border-radius: 4px;
   padding: 4px;
 
-  &[btn-toggle="off"]{
+  &[btn-toggle="off"] {
     /* background-color: red; */
   }
 }
 
-.share-btns-container{
+.share-btns-container {
   margin-top: 10px;
   position: relative;
 
 }
 
-.share-btns-z{
+.share-btns-z {
   position: fixed;
   top: 26%;
   left: 50%;
@@ -392,7 +393,7 @@ nav {
   flex-direction: column;
   gap: 10px;
 
-  .share-btns-link{
+  .share-btns-link {
     background-color: #96B6C5;
     border-radius: 8px;
     padding: 8px 12px;
@@ -401,25 +402,26 @@ nav {
     cursor: pointer;
   }
 
-  .share-btns-btns{
+  .share-btns-btns {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin: 18px 0; 
-    > *:hover{
+    margin: 18px 0;
+
+    >*:hover {
       background-color: var(--b2);
       color: var(--c3);
       transform: scale(1.2);
     }
   }
 
-  .share-btns-close{
-    margin: 0 auto ;
+  .share-btns-close {
+    margin: 0 auto;
     border: 1px solid var(--b2);
     border-radius: 10px;
     padding: 10px;
-    
-    &:hover{
+
+    &:hover {
       background-color: var(--b2);
       color: var(--c3);
       opacity: 0.4;
@@ -453,9 +455,10 @@ nav {
   line-height: 1.7;
   color: #2c3e50;
 
+
   position: relative;
   height: 100%;
-  max-width: 900px;
+  max-width: 600px;
   margin: 40px auto;
   padding: 30px;
 
@@ -519,8 +522,10 @@ nav {
 
 .instagram-g {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
 }
 
 .instagram-g img {
@@ -542,11 +547,27 @@ nav {
 }
 
 
+.flex-mobile {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
 @media screen and (max-width: 896px) {
   nav {
-    gap: 0
+    gap: 0;
+    >* {
+      padding: .1em .4em;
+    }
   }
 
+  .flex-mobile {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  
   .home .childs {
     display: flex;
     flex-direction: column;
@@ -565,5 +586,12 @@ nav {
     order: 3;
   }
 
-}
+  .childs{
+    padding-bottom: 4em;
+  }
 
+  footer {
+    transform: translateY(160px) translateX(-30px);
+    margin: auto;
+  }
+}
