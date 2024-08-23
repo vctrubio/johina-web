@@ -533,28 +533,10 @@ nav {
   color: var(--b1);
 }
 
-
 .instagram-video-feed {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  width: 100%;
 }
 
-.video-item {
-  width: 300px;
-  text-align: center;
-}
-
-.video-item video {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.video-item p {
-  margin-top: 5px;
-  font-size: 14px;
-  color: #333;
-}
 
 @media screen and (max-width: 896px) {
   nav {

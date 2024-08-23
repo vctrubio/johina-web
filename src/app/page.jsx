@@ -24,14 +24,11 @@ const sortInstagramCategory = async () => {
   }
 
   const igMedia = []
-  const igAlbum = []
   const igVideo = []
 
   media.data.forEach(item => {
-    if (item.media_type === 'IMAGE') {
+    if (item.media_type === 'IMAGE' || item.media_type === 'CAROUSEL_ALBUM') {
       igMedia.push(item)
-    } else if (item.media_type === 'CAROUSEL_ALBUM') {
-      igAlbum.push(item)
     } else if (item.media_type === 'VIDEO') {
       igVideo.push(item)
     }
@@ -39,13 +36,9 @@ const sortInstagramCategory = async () => {
 
   return {
     igMedia,
-    igAlbum,
     igVideo
   }
 }
-
-
-
 
 const HomeComponent = async () => {
 
@@ -55,62 +48,34 @@ const HomeComponent = async () => {
 
     content.map((media, index) => {
       console.log("🚀 ~ looping ~ media:", media);
-      console.log(`🚀 ~ looping ~ index: ${index} ~ media: ${media}`)
+      // console.log(`🚀 ~ looping ~ index: ${index} ~ media: ${media}`)
     }
     )
   }
 
-  looping({ content: igVideo })
+  // looping({ content: igMedia })
 
   return (
     <div className="home">
       <div className="childs">
 
-        {/* <div>
+        <div>
           <div className="text-center font-bold mb-1">Photos</div>
           <Iphone className="iphone">
             <InstagramFeed content={igMedia} />
           </Iphone>
-        </div> */}
-
-        <div className="border w-full flex flex-col space-y-2">
-            <div>albums</div>
-            {igAlbum.map((media, index) => (
-              <div key={index}>
-                {media.id}
-              </div>
-            ))}
         </div>
-        
-
-
-        {/* <div className="border w-full flex flex-col space-y-2">
-            <div>videos</div>
-            {igVideo.map((media, index) => (
-              <InstagramVideoFeed video={media} />
-            ))}
-            <div>
-          </div>
-        </div> */}
-
-
-        {/* <div>
-          <div className="text-center font-bold mb-1">Albums</div>
-          <Iphone className="iphone">
-            <InstagramFeed content={igAlbum} />
-          </Iphone>
-        </div>
-          
-        // this is the idea but its not working
 
         <div>
           <div className="text-center font-bold mb-1">Videos</div>
           <Iphone className="iphone">
-            <InstagramFeed content={igVideo} />
+            {igVideo.map((media, index) => (
+              <InstagramVideoFeed video={media} key={index}/>
+            ))}
           </Iphone>
-        </div> */}
-
-
+          <div>
+          </div>
+        </div>
 
 
         {/* <div className="child-text">
@@ -127,7 +92,7 @@ const HomeComponent = async () => {
         </div> */}
 
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -19,20 +19,19 @@ export const InstagramCard = ({ media }) => {
 
 export const InstagramVideoFeed = ({ video }) => {
     return (
-      <div className="instagram-video-feed">
-        <div className="video-item">
-          <video controls width="400">
-            <source src={video.media_url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          {video.caption && <p>{video.caption}</p>}
+        <div className="instagram-video-feed">
+            <div>
+                <video controls width="400">
+                    <source src={video.media_url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                {video.caption && <div className='instagram-caption'>{video.caption}</div>}
+            </div>
         </div>
-      </div>
     );
-  };
-  
+};
 
-export const InstagramFeed = async ({content}) => {
+export const InstagramFeed = async ({ content }) => {
     return (
         <div className='w-full'>
             {content.map((media, index) => (
