@@ -55,7 +55,7 @@ const HomeComponent = async () => {
   return (
     <div className="home">
       <div className="childs">
-        <div className="flex gap-4">
+        <div className="flex-mobile gap-4">
           {
             igMedia.length > 0 && (
               <div>
