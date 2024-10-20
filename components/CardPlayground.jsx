@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './CardPlayground.css';
+import Filters from './Filters';  // Import the Filters component
 
 const Card = ({ id, title, image, showTitle, onClick, isSelected, className }) => {
     return (
@@ -198,38 +199,19 @@ export const CardPlayground = () => {
 
     return (
         <div className="container-cards">
-            <div className="filters">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                />
-                <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="filter-select"
-                >
-                    <option value="">All Categories</option>
-                    {categories.map(category => (
-                        <option key={category} value={category}>{category}</option>
-                    ))}
-                </select>
-                <select
-                    value={selectedLocation}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
-                    className="filter-select"
-                >
-                    <option value="">All Locations</option>
-                    {locations.map(location => (
-                        <option key={location} value={location}>{location}</option>
-                    ))}
-                </select>
-                <button onClick={() => setShowTitles(!showTitles)}>
-                    {showTitles ? 'Hide Titles' : 'Show Titles'}
-                </button>
-            </div>
+            <Filters
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+                categories={categories}
+                locations={locations}
+                showTitles={showTitles}
+                setShowTitles={setShowTitles}
+                cards={cards}
+            />
             <div className="card-grid" ref={cardGridRef}>
                 {filteredCards.map((card, index) => (
                     <React.Fragment key={card.id}>
