@@ -556,6 +556,7 @@ nav {
 @media screen and (max-width: 896px) {
   nav {
     gap: 0;
+
     >* {
       padding: .1em .4em;
     }
@@ -567,7 +568,7 @@ nav {
     margin: auto;
   }
 
-  
+
   .home .childs {
     display: flex;
     flex-direction: column;
@@ -586,7 +587,7 @@ nav {
     order: 3;
   }
 
-  .childs{
+  .childs {
     padding-bottom: 4em;
   }
 
