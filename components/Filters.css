@@ -61,7 +61,9 @@
     position: relative;
 }
 
-.filter-button {
+.filter-button,
+.show-titles-btn,
+.reset-button {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -103,23 +105,11 @@
     border-color: #ccc;
 }
 
-.select-container:hover .select-icon,
+.filter-button:hover .select-icon,
 .show-titles-btn:hover .lightbulb-icon,
 .reset-button:hover svg {
     fill: #96B6C5;
     border-color: #96B6C5;
-
-}
-
-.show-titles-btn,
-.reset-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .lightbulb-icon.on {
@@ -206,6 +196,7 @@
 
     .secondary-filters {
         align-items: flex-end;
+        justify-content: flex-end;
     }
 
     .select-container,
@@ -214,17 +205,18 @@
         width: auto;
     }
 
-    .filter-button {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 10px;
-    }
-
+    .filter-button,
     .show-titles-btn,
     .reset-button {
-        width: auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 10px 4px;
+    }
+
+    .secondary-filters .filter-button,
+    .secondary-filters .show-titles-btn,
+    .secondary-filters .reset-button {
         justify-content: flex-end;
-        padding: 10px;
     }
 
     .select-icon {
@@ -233,8 +225,7 @@
 
     .lightbulb-icon,
     .reset-button svg {
-        margin-left: 0;
+        margin-left: 10px;
         margin-right: 0;
     }
 }
-
