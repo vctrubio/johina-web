@@ -164,7 +164,8 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    /* background-color: #45a049; */ 
+    /* remove this is horrribel. */
 }
 
 h1 {

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c1: #96B6C5;
+}
+
+/* You can add any global styles here */
