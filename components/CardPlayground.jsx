@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import './CardPlayground.css';
 
-const Card = ({ id, title, image, showTitle, onClick, isSelected }) => {
+const Card = ({ id, title, image, showTitle, onClick, isSelected, className }) => {
     return (
-        <div className={`card ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+        <div id={`card-${id}`} className={`card ${isSelected ? 'selected' : ''} ${className}`} onClick={onClick}>
             <div
                 className="card-image"
                 style={{ backgroundColor: image ? 'transparent' : `hsl(${id * 100 % 360}, 70%, 80%)` }}
@@ -37,7 +38,14 @@ const CardView = ({ card, onClose }) => {
 // Helper function to get unique values from an array
 const getUniqueValues = (array, key) => [...new Set(array.map(item => item[key]))];
 
+// Helper function to generate a slug from a title
+const generateSlug = (title) => {
+    return title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+};
+
 export const CardPlayground = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
     const [showTitles, setShowTitles] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -46,6 +54,10 @@ export const CardPlayground = () => {
     const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
     const [cardViewPosition, setCardViewPosition] = useState(0);
     const [isCardViewVisible, setIsCardViewVisible] = useState(false);
+    const [animatedCards, setAnimatedCards] = useState([]);
+    const [animationType, setAnimationType] = useState('');
+    const cardGridRef = useRef(null);
+    const [isClosing, setIsClosing] = useState(false);
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
@@ -78,7 +90,7 @@ export const CardPlayground = () => {
         { id: 22, title: 'Petra', image: 'https://source.unsplash.com/featured/?petra', category: 'Archaeological', location: 'Jordan', description: 'Historical and archaeological city famous for its rock-cut architecture.' },
         { id: 23, title: 'Machu Picchu', image: 'https://source.unsplash.com/featured/?machupicchu', category: 'Archaeological', location: 'Peru', description: '15th-century Inca citadel located in the Eastern Cordillera of southern Peru.' },
         { id: 24, title: 'Angkor Wat', image: 'https://source.unsplash.com/featured/?angkorwat', category: 'Religious', location: 'Siem Reap, Cambodia', description: 'Largest religious monument in the world, originally constructed as a Hindu temple.' },
-    ];
+    ].map(card => ({ ...card, slug: generateSlug(card.title) })); // Add slug to each card
 
     // Get unique categories and locations
     const categories = getUniqueValues(cards, 'category');
@@ -90,17 +102,72 @@ export const CardPlayground = () => {
         return 4; // Desktop
     };
 
+    useEffect(() => {
+        const slug = searchParams.get('slug');
+        if (slug) {
+            const card = cards.find(c => c.slug === slug);
+            if (card) {
+                setSelectedCard(card.id);
+                setIsCardViewVisible(true);
+                // Use a longer timeout to ensure the DOM has updated
+                setTimeout(() => scrollToCard(card.id), 300);
+            }
+        }
+    }, [searchParams, cards]);
+
+    const scrollToCard = (cardId) => {
+        console.log('Scrolling to card:', cardId);
+        const cardViewElement = document.querySelector('.card-view-container.visible');
+        
+        if (cardViewElement) {
+            console.log('CardView element found');
+            const cardViewRect = cardViewElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate the position to scroll to (just above the CardView)
+            const scrollPosition = scrollTop + cardViewRect.top - 360; // 20px margin
+            
+            console.log('Scrolling to position:', scrollPosition);
+            
+            // Scroll to position the CardView at the top of the viewport
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+        } else {
+            console.log('CardView element not found');
+        }
+    };
+
     const handleCardClick = (cardId) => {
+        console.log('Card clicked:', cardId);
         setSelectedCard(prevSelectedCard => {
             if (prevSelectedCard === cardId) {
+                setIsClosing(true);
                 setIsCardViewVisible(false);
-                setTimeout(() => setSelectedCard(null), 300);
-                return prevSelectedCard;
+                setTimeout(() => {
+                    setSelectedCard(null);
+                    setIsClosing(false);
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.delete('slug');
+                    window.history.pushState({}, '', newUrl);
+                }, 0); // Match this delay with the CSS animation duration
             } else {
+                const selectedCard = cards.find(c => c.id === cardId);
                 setSelectedCard(cardId);
-                setTimeout(() => setIsCardViewVisible(true), 10);
-                return cardId;
+                setIsCardViewVisible(true);
+                setIsClosing(false);
+                
+                setTimeout(() => {
+                    console.log('Scrolling to card:', cardId);
+                    scrollToCard(cardId);
+                }, 100);
+                
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('slug', selectedCard.slug);
+                window.history.pushState({}, '', newUrl);
             }
+            return cardId;
         });
     };
 
@@ -163,18 +230,19 @@ export const CardPlayground = () => {
                     {showTitles ? 'Hide Titles' : 'Show Titles'}
                 </button>
             </div>
-            <div className="card-grid">
+            <div className="card-grid" ref={cardGridRef}>
                 {filteredCards.map((card, index) => (
                     <React.Fragment key={card.id}>
                         <Card
                             {...card}
+                            id={`card-${card.id}`}
                             showTitle={showTitles}
                             onClick={() => handleCardClick(card.id)}
                             isSelected={selectedCard === card.id}
                         />
-                        {selectedCard === card.id && (
+                        {getCardRowIndex(index) === getCardRowIndex(filteredCards.findIndex(c => c.id === selectedCard)) && (
                             <div 
-                                className={`card-view-container ${isCardViewVisible ? 'visible' : ''}`}
+                                className={`card-view-container ${selectedCard === card.id && isCardViewVisible ? 'visible' : ''} ${isClosing ? 'closing' : ''}`}
                                 style={{
                                     gridColumn: '1 / -1',
                                     gridRow: `${getCardRowIndex(index) + 2}`,
