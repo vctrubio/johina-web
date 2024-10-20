@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Footer } from "@/components/footer";
 import { SwiperHome } from "@/components/SwiperFrontPage";
 import Iphone from "@/components/Iphone";
@@ -104,7 +105,9 @@ export default function Home() {
     <div>
       {/* <SwiperHome /> */}
       {/* <HomeComponent /> */}
-      <CardPlayground />
+      <Suspense fallback={<div>Loading...</div>}>
+        <CardPlayground />
+      </Suspense>
     </div>
   );
 }
