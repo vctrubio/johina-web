@@ -2,6 +2,7 @@ import { Noto_Serif_Khitan_Small_Script } from "next/font/google";
 import { Montserrat, Titillium_Web } from "next/font/google";
 
 import "../globals.css";
+import "../../components/CardPlayground.css";
 import NavBar from "../../components/NavBar";
 import TitleBar from "../../components/TitleBar";
 
@@ -30,7 +31,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={titilliumWeb.className}>
         <TitleBar />
-        <NavBar />
+        {/* <NavBar /> */}
         {children}
       </body>
     </html>

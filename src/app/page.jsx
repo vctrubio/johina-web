@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer";
 import { SwiperHome } from "@/components/SwiperFrontPage";
 import Iphone from "@/components/Iphone";
 import { InstagramFeed, InstagramVideoFeed } from "@/components/Instagraming";
+import { CardPlayground } from "@/components/CardPlayground";
 
 const sortInstagramCategory = async () => {
   const fields = 'id,caption,media_url,media_type,permalink';
@@ -101,8 +102,9 @@ const HomeComponent = async () => {
 export default function Home() {
   return (
     <div>
-      <SwiperHome />
-      <HomeComponent />
+      {/* <SwiperHome /> */}
+      {/* <HomeComponent /> */}
+      <CardPlayground />
     </div>
   );
 }
