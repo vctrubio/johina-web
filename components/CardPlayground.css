@@ -15,12 +15,54 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .card-view-container.visible {
     max-height: 1000px; /* Adjust this value based on your maximum expected height */
     opacity: 1;
+}
+
+.card-view-container.closing .card-view {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.card-view {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.card-view-container.visible .card-view {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.card-view-container:not(.visible) .card-view {
+    animation: slideUp 0.5s ease-out forwards;
 }
 
 .card {
@@ -60,19 +102,6 @@
 
 .card-title.show {
     opacity: 1;
-}
-
-.card-view {
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out;
-}
-
-.card-view-container.visible .card-view {
-    transform: translateY(0);
 }
 
 .card-view-content {
@@ -117,28 +146,6 @@
 .close-button {
     align-self: flex-start;
     margin-top: auto;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 button {
@@ -273,4 +280,9 @@ h1 {
 
 .card-shifted {
     transform: translateY(20px);
+}
+
+.slide-down {
+    animation: slideDown 0.3s ease-out;
+    animation-fill-mode: both;
 }
