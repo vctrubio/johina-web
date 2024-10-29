@@ -4,6 +4,7 @@ import { SwiperHome } from "@/components/SwiperFrontPage";
 import Iphone from "@/components/Iphone";
 import { InstagramFeed, InstagramVideoFeed } from "@/components/Instagraming";
 import { CardPlayground } from "@/components/CardPlayground";
+import { fetchAllContenful } from '@/lib/fetchQueries';
 
 const sortInstagramCategory = async () => {
   const fields = 'id,caption,media_url,media_type,permalink';
@@ -100,13 +101,16 @@ const HomeComponent = async () => {
   )
 }
 
-export default function Home() {
+export default async function Home() {
+  const response = await fetchAllContenful();
+  const cards = response.muralCollection && response.muralCollection.items;
+  console.log("🚀 ~ Home ~ cards:", cards);
   return (
     <div>
       {/* <SwiperHome /> */}
       {/* <HomeComponent /> */}
       <Suspense fallback={<div>Loading...</div>}>
-        <CardPlayground />
+        <CardPlayground cards={cards} />
       </Suspense>
     </div>
   );

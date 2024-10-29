@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import './CardPlayground.css';
-import Filters from './Filters';  // Import the Filters component
+import { fetchAllContenful } from "@/lib/fetchQueries";
+import Filters from './Filters';
 
 const Card = ({ id, title, image, showTitle, onClick, isSelected, className }) => {
     return (
@@ -44,7 +45,7 @@ const generateSlug = (title) => {
     return title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 };
 
-export const CardPlayground = () => {
+export const CardPlayground = ({  }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [showTitles, setShowTitles] = useState(false);
@@ -60,16 +61,10 @@ export const CardPlayground = () => {
     const cardGridRef = useRef(null);
     const [isClosing, setIsClosing] = useState(false);
 
-    useEffect(() => {
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const cards = [
+        const cards = [
         { id: 1, title: 'Eiffel Tower', image: 'https://source.unsplash.com/featured/?eiffeltower', category: 'Landmark', location: 'Paris, France', description: 'Iconic iron lattice tower on the Champ de Mars in Paris.' },
-        // { id: 2, title: 'Great Wall of China', image: 'https://source.unsplash.com/featured/?greatwall', category: 'Historical', location: 'China', description: 'Ancient fortification system spanning thousands of miles.' },
-        // { id: 3, title: 'Machu Picchu', image: 'https://source.unsplash.com/featured/?machupicchu', category: 'Archaeological', location: 'Peru', description: '15th-century Inca citadel set high in the Andes Mountains.' },
+        { id: 2, title: 'Great Wall of China', image: 'https://source.unsplash.com/featured/?greatwall', category: 'Historical', location: 'China', description: 'Ancient fortification system spanning thousands of miles.' },
+        { id: 3, title: 'Machu Picchu', image: 'https://source.unsplash.com/featured/?machupicchu', category: 'Archaeological', location: 'Peru', description: '15th-century Inca citadel set high in the Andes Mountains.' },
         // { id: 4, title: 'Taj Mahal', image: 'https://source.unsplash.com/featured/?tajmahal', category: 'Monument', location: 'Agra, India', description: 'Ivory-white marble mausoleum on the right bank of the river Yamuna.' },
         // { id: 5, title: 'Colosseum', image: 'https://source.unsplash.com/featured/?colosseum', category: 'Historical', location: 'Rome, Italy', description: 'Oval amphitheatre in the centre of Rome, built of concrete and sand.' },
         // { id: 6, title: 'Petra', image: 'https://source.unsplash.com/featured/?petra', category: 'Archaeological', location: 'Jordan', description: 'Famous archaeological site containing rock-cut architecture and water conduit system.' },
@@ -93,15 +88,12 @@ export const CardPlayground = () => {
         // { id: 24, title: 'Angkor Wat', image: 'https://source.unsplash.com/featured/?angkorwat', category: 'Religious', location: 'Siem Reap, Cambodia', description: 'Largest religious monument in the world, originally constructed as a Hindu temple.' },
     ].map(card => ({ ...card, slug: generateSlug(card.title) })); // Add slug to each card
 
-    // Get unique categories and locations
-    const categories = getUniqueValues(cards, 'category');
-    const locations = getUniqueValues(cards, 'location');
 
-    const getCardsPerRow = () => {
-        if (windowWidth < 768) return 1; // Mobile
-        if (windowWidth < 1024) return 2; // Tablet
-        return 4; // Desktop
-    };
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const slug = searchParams.get('slug');
@@ -116,20 +108,49 @@ export const CardPlayground = () => {
         }
     }, [searchParams, cards]);
 
+    useEffect(() => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            if (cardRect.top > cardViewPosition) {
+                card.classList.add('card-shifted');
+            } else {
+                card.classList.remove('card-shifted');
+            }
+        });
+    }, [cardViewPosition, selectedCard]);
+
+
+
+
+    // Get unique categories and locations
+
+    if (!cards)
+        return <>no Cards....</>
+
+    const categories = getUniqueValues(cards, 'category');
+    const locations = getUniqueValues(cards, 'location');
+
+    const getCardsPerRow = () => {
+        if (windowWidth < 768) return 1; // Mobile
+        if (windowWidth < 1024) return 2; // Tablet
+        return 4; // Desktop
+    };
+
     const scrollToCard = (cardId) => {
         console.log('Scrolling to card:', cardId);
         const cardViewElement = document.querySelector('.card-view-container.visible');
-        
+
         if (cardViewElement) {
             console.log('CardView element found');
             const cardViewRect = cardViewElement.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             // Calculate the position to scroll to (just above the CardView)
             const scrollPosition = scrollTop + cardViewRect.top - 360; // 20px margin
-            
+
             console.log('Scrolling to position:', scrollPosition);
-            
+
             // Scroll to position the CardView at the top of the viewport
             window.scrollTo({
                 top: scrollPosition,
@@ -158,12 +179,12 @@ export const CardPlayground = () => {
                 setIsCardViewVisible(true);
                 // setSelectedCard(cardId);
                 // setIsClosing(false);
-                
+
                 // setTimeout(() => {
                 //     console.log('Scrolling to card:', cardId);
                 //     scrollToCard(cardId);
                 // }, 100);
-                
+
                 const newUrl = new URL(window.location);
                 newUrl.searchParams.set('slug', selectedCard.slug);
                 window.history.pushState({}, '', newUrl);
@@ -178,24 +199,13 @@ export const CardPlayground = () => {
 
     const filteredCards = cards.filter(card => {
         const matchesSearch = card.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                              card.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                              card.location.toLowerCase().includes(searchTerm.toLowerCase());
+            card.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            card.location.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = selectedCategory === '' || card.category === selectedCategory;
         const matchesLocation = selectedLocation === '' || card.location === selectedLocation;
         return matchesSearch && matchesCategory && matchesLocation;
     });
 
-    useEffect(() => {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            const cardRect = card.getBoundingClientRect();
-            if (cardRect.top > cardViewPosition) {
-                card.classList.add('card-shifted');
-            } else {
-                card.classList.remove('card-shifted');
-            }
-        });
-    }, [cardViewPosition, selectedCard]);
 
     return (
         <div className="container-cards">
@@ -214,7 +224,7 @@ export const CardPlayground = () => {
             />
             <div className="card-grid" ref={cardGridRef}>
                 {filteredCards.map((card, index) => (
-                    <React.Fragment key={card.id}>
+                    <React.Fragment key={card.slug}>
                         <Card
                             {...card}
                             id={`card-${card.id}`}
@@ -223,7 +233,7 @@ export const CardPlayground = () => {
                             isSelected={selectedCard === card.id}
                         />
                         {getCardRowIndex(index) === getCardRowIndex(filteredCards.findIndex(c => c.id === selectedCard)) && (
-                            <div 
+                            <div
                                 className={`card-view-container ${selectedCard === card.id && isCardViewVisible ? 'visible' : ''} ${isClosing ? 'closing' : ''}`}
                                 style={{
                                     gridColumn: '1 / -1',

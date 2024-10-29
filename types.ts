@@ -4,8 +4,9 @@ export type MuralQuery = {
             title: string
             description: string
             location: string
-            closeUp: boolean
-            photosCollection: {
+            category: string
+            slug: string
+            photos: {
                 items: {
                     url: string
                 }[]
