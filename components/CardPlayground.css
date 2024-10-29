@@ -173,7 +173,8 @@ button:hover {
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #000000;
+    letter-spacing: 1px;
     margin-bottom: 20px;
 }
 

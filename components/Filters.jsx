@@ -80,7 +80,7 @@ const Filters = ({ searchTerm, setSearchTerm, selectedCategory, setSelectedCateg
                         </button>
                         <div ref={categoryDropdownRef} className={`dropdown ${isCategoryOpen ? 'open' : ''}`}>
                             {filteredCategories.map(category => (
-                                <button 
+                                <button
                                     key={`category-${category}`}
                                     onClick={() => {
                                         setSelectedCategory(category);
@@ -102,7 +102,7 @@ const Filters = ({ searchTerm, setSearchTerm, selectedCategory, setSelectedCateg
                         </button>
                         <div ref={locationDropdownRef} className={`dropdown ${isLocationOpen ? 'open' : ''}`}>
                             {filteredLocations.map(location => (
-                                <button 
+                                <button
                                     key={`location-${location}`}
                                     onClick={() => {
                                         setSelectedLocation(location);
