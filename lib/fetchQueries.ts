@@ -49,7 +49,7 @@ export const fetchAllContenful = async () => {
                         description: item.fields.description,
                         location: item.fields.location,
                         category: item.fields.category,
-                        url: item.fields.url,
+                        slug: item.fields.url,
                         photos: {
                             items: photoAssets.map(url => ({ url }))
                         }
