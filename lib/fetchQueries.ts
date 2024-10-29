@@ -1,54 +1,106 @@
 import { MuralQuery } from "@/types";
-import { contentGqlFetcher } from "./fetch";
 
-export const fetchAllContenful = async () => {
-    const query = `#graphql
-        query main {
-            muralCollection {
-                items {
-                title
-                description
-                location
-                closeUp
-                photosCollection {
-                    items {
-                    url
-                    }
-                }
-                }
-            }
-        }
-    `;
+const validateCredentials = () => {
+    const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
+    const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
-    const data = await contentGqlFetcher<MuralQuery>({ query });
-    // const AnotherData = await contentGqlFetcher<AnotherMuralQuery>({ query });
-    if (!data)
-        throw new Error('Check......')
-    return data
+    if (!space || !accessToken) {
+        throw new Error('Contentful credentials are missing. Please check your environment variables.');
+    }
+
+    return { space, accessToken };
 }
 
-export const fetchMuralById = async (titleId: string) => {
-    // console.log('check id ,', titleId)
-    const query = `#graphql
-        query MuralCollection($where: MuralFilter) {
-            muralCollection(where: $where) {
-                items {
-                    title
-                    description
-                    location
-                    closeUp
-                    photosCollection {
-                        items {
-                            url
-                        }
-                    }
-                }
-            }
-        }
-    `;
+export const fetchAllContenful = async () => {
+    try {
+        const { space, accessToken } = validateCredentials();
+        
+        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=mural&access_token=${accessToken}`;
 
-    const data = await contentGqlFetcher<MuralQuery>({ query, variables: {where: {title: titleId}} });
-    if (!data)
-        throw new Error('Check......')
-    return data
+        // First make a test request to verify credentials
+        const testResponse = await fetch(`https://cdn.contentful.com/spaces/${space}?access_token=${accessToken}`);
+        
+        if (!testResponse.ok) {
+            const error = await testResponse.json();
+            throw new Error(`Invalid Contentful credentials: ${error.message}`);
+        }
+
+        // If credentials are valid, proceed with the actual request
+        const response = await fetch(url);
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to fetch murals: ${error.message}`);
+        }
+        
+        const data = await response.json();
+        
+        // Transform the response to match your existing structure
+        const transformedData = {
+            muralCollection: {
+                items: data.items.map(item => ({
+                    title: item.fields.title,
+                    description: item.fields.description,
+                    location: item.fields.location,
+                    closeUp: item.fields.closeUp,
+                    photosCollection: {
+                        items: item.fields.photos?.map((photoId: string) => {
+                            const asset = data.includes.Asset.find((asset: any) => asset.sys.id === photoId);
+                            return {
+                                url: asset?.fields.file.url
+                            };
+                        }) || []
+                    }
+                }))
+            }
+        };
+
+        return transformedData as MuralQuery;
+
+    } catch (error) {
+        console.error('Error in fetchAllContenful:', error);
+        throw error instanceof Error ? error : new Error('Unknown error occurred');
+    }
+}
+
+// Let's update fetchMuralById to use REST API as well
+export const fetchMuralById = async (titleId: string) => {
+    try {
+        const { space, accessToken } = validateCredentials();
+        
+        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=mural&fields.title=${encodeURIComponent(titleId)}&access_token=${accessToken}`;
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to fetch mural: ${error.message}`);
+        }
+
+        const data = await response.json();
+        
+        // Transform the response to match your existing structure
+        const transformedData = {
+            muralCollection: {
+                items: data.items.map(item => ({
+                    title: item.fields.title,
+                    description: item.fields.description,
+                    location: item.fields.location,
+                    closeUp: item.fields.closeUp,
+                    photosCollection: {
+                        items: item.fields.photos?.map((photoId: string) => {
+                            const asset = data.includes.Asset.find((asset: any) => asset.sys.id === photoId);
+                            return {
+                                url: asset?.fields.file.url
+                            };
+                        }) || []
+                    }
+                }))
+            }
+        };
+
+        return transformedData as MuralQuery;
+
+    } catch (error) {
+        console.error('Error in fetchMuralById:', error);
+        throw error instanceof Error ? error : new Error('Unknown error occurred');
+    }
 }
