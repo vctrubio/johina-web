@@ -32,6 +32,9 @@
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    /* margin: 22px 12px; */
+    /* border: 1px solid red;
+    height: 800px; */
     transition: transform 0.5s ease-out;
 }
 

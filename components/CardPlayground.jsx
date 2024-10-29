@@ -155,14 +155,14 @@ export const CardPlayground = () => {
                 }, 0); // Match this delay with the CSS animation duration
             } else {
                 const selectedCard = cards.find(c => c.id === cardId);
-                setSelectedCard(cardId);
                 setIsCardViewVisible(true);
-                setIsClosing(false);
+                // setSelectedCard(cardId);
+                // setIsClosing(false);
                 
-                setTimeout(() => {
-                    console.log('Scrolling to card:', cardId);
-                    scrollToCard(cardId);
-                }, 100);
+                // setTimeout(() => {
+                //     console.log('Scrolling to card:', cardId);
+                //     scrollToCard(cardId);
+                // }, 100);
                 
                 const newUrl = new URL(window.location);
                 newUrl.searchParams.set('slug', selectedCard.slug);
