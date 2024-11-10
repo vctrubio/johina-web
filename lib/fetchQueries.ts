@@ -13,46 +13,34 @@ const validateCredentials = () => {
 }
 
 export const fetchAllContenful = async () => {
-    debugContentful()
     try {
         const { space, accessToken } = validateCredentials();
 
-        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=mural&access_token=${accessToken}`;
+        const client = createClient({
+            space: space,
+            accessToken: accessToken,
+        });
 
-        // First make a test request to verify credentials
-        const testResponse = await fetch(`https://cdn.contentful.com/spaces/${space}?access_token=${accessToken}`);
+        const response = await client.getEntries({
+            content_type: 'mural',
+        });
 
-        if (!testResponse.ok) {
-            const error = await testResponse.json();
-            throw new Error(`Invalid Contentful credentials: ${error.message}`);
-        }
-
-        // If credentials are valid, proceed with the actual request
-        const response = await fetch(url);
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(`Failed to fetch murals: ${error.message}`);
-        }
-
-        const data = await response.json();
-        console.log("🚀 ~ fetchAllContenful ~ data:", data)
+        // console.log("Raw response:", response);
 
         const transformedData = {
             muralCollection: {
-                items: data.items.map(item => {
-                    const photoAssets = item.fields.photos?.map(photoLink => {
-                        const asset = data.includes.Asset.find(
-                            (asset: any) => asset.sys.id === photoLink.sys.id
-                        );
-                        return "https:" + asset?.fields?.file?.url;
+                items: response.items.map(item => {
+                    const fields = item.fields as any;
+                    const photoAssets = fields.photos?.map((photo: any) => {
+                        return "https:" + photo.fields.file.url;
                     }).filter(Boolean) || [];
 
                     return {
-                        title: item.fields.title,
-                        description: item.fields.description,
-                        location: item.fields.location,
-                        category: item.fields.category,
-                        slug: item.fields.url,
+                        title: fields.title,
+                        description: fields.description,
+                        location: fields.location,
+                        category: fields.category,
+                        slug: fields.url,
                         photos: {
                             items: photoAssets.map(url => ({ url }))
                         }
@@ -73,12 +61,12 @@ export const debugContentful = async () => {
     try {
         const { space, accessToken } = validateCredentials();
 
-        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=mural&access_token=${accessToken}`;
+        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=Mural&access_token=${accessToken}`;
 
         const response = await fetch(url);
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(`Failed to fetch murals: ${error.message}`);
+            throw new Error(`Failed to fetch Murals: ${error.message}`);
         }
 
         const data = await response.json();
@@ -113,46 +101,49 @@ export const debugContentful = async () => {
 
 export const listContentTypes = async () => {
     try {
-      const { space, accessToken } = validateCredentials();
-  
-      // Use the Content Management API endpoint to list all content types
-      const url = `https://cdn.contentful.com/spaces/${space}/content_types?access_token=${accessToken}`;
-  
-      const response = await fetch(url);
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(`Failed to fetch content types: ${error.message}`);
-      }
-  
-      const data = await response.json();
-  
-      // Pretty print the available content types
-      console.log("Available Content Types:");
-      data.items.forEach((item: any, index: number) => {
-        console.log(`\nContent Type ${index + 1}:`);
-        console.log(`ID: ${item.sys.id}`);
-        console.log(`Name: ${item.name}`);
-        console.log(`Description: ${item.description}`);
-      });
-  
-    } catch (error) {
-      console.error("Error in listContentTypes:", error);
-      throw error instanceof Error ? error : new Error("Unknown error occurred");
-    }
-  };
+        const { space, accessToken } = validateCredentials();
 
-  
+        const url = `https://cdn.contentful.com/spaces/${space}/content_types?access_token=${accessToken}`;
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to fetch content types: ${error.message}`);
+        }
+
+        const data = await response.json();
+
+        // More detailed logging
+        console.log("\nDetailed Content Types Information:");
+        data.items.forEach((item: any) => {
+            console.log(`\nContent Type ID: ${item.sys.id}`);
+            console.log(`Display Name: ${item.name}`);
+            console.log(`Description: ${item.description || 'No description'}`);
+            console.log('Fields:');
+            item.fields.forEach((field: any) => {
+                console.log(`  - ${field.id} (${field.type})`);
+            });
+        });
+
+        return data;
+
+    } catch (error) {
+        console.error("Error in listContentTypes:", error);
+        throw error instanceof Error ? error : new Error("Unknown error occurred");
+    }
+};
+
 // Let's update fetchMuralById to use REST API as well
 export const fetchMuralById = async (titleId: string) => {
     try {
         const { space, accessToken } = validateCredentials();
 
-        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=mural&fields.title=${encodeURIComponent(titleId)}&access_token=${accessToken}`;
+        const url = `https://cdn.contentful.com/spaces/${space}/entries?content_type=Mural&fields.title=${encodeURIComponent(titleId)}&access_token=${accessToken}`;
 
         const response = await fetch(url);
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(`Failed to fetch mural: ${error.message}`);
+            throw new Error(`Failed to fetch Mural: ${error.message}`);
         }
 
         const data = await response.json();

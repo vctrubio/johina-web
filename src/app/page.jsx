@@ -104,7 +104,6 @@ const HomeComponent = async () => {
 export default async function Home() {
   const response = await fetchAllContenful();
   const cards = response.muralCollection && response.muralCollection.items;
-  console.log("🚀 ~ Home ~ cards:", cards);
   return (
     <div>
       {/* <SwiperHome /> */}
